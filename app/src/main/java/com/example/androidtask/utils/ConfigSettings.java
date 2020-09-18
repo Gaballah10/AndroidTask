@@ -1,0 +1,9 @@
+package com.example.androidtask.utils;
+
+public class ConfigSettings {
+
+
+    public static final String Server_URL = "https://data.gov.sg/api/action/";
+    public static final String ConsumptionData = "datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f&limit=59";
+
+}

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.androidtask.year.details.DetailsViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".year.details.DetailsActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            tools:context=".year.details.DetailsActivity">
+
+
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_alignParentStart="true"
+                android:text="@={vm.yearDate}"
+                android:layout_marginStart="10dp"
+                android:textColor="#000"
+                android:gravity="center_vertical"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:gravity="end"
+                android:layout_marginEnd="10dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/down" />
+
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center_vertical"
+            android:text="@string/dropDownStatment"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+</layout>

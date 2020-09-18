@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+    <androidx.cardview.widget.CardView
+        android:id="@+id/Record_Card"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        android:layout_margin="5dp"
+        android:background="@color/Card_Background"
+        >
+
+        <TextView
+            android:id="@+id/date_record"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="6dp"
+            android:textColor="#000"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:id="@+id/record"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical|center"
+            android:layout_marginStart="6dp"
+            android:textColor="#000"
+            android:textSize="16sp"
+            />
+
+
+
+        <ImageView
+            android:id="@+id/image_down"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:visibility="gone"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="5dp"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
