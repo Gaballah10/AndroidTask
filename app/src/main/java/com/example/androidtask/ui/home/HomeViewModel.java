@@ -52,9 +52,6 @@ public class HomeViewModel extends ViewModel {
                             }
                         }
 
-                        // Log.d("ddddsssss",String.valueOf(consumptionResultYear.size()));
-                        // muResultYear.setValue(consumptionResultYear);
-
                         for (int i = 0; i < consumptionResultAll.getValue().getResult().getRecords().size() - 2; i++) {
                             if (Double.parseDouble(consumptionResultAll.getValue().getResult().getRecords().get(i).getVolumeOfMobileData()) > Double.parseDouble(consumptionResultAll.getValue().getResult().getRecords().get(i + 1).getVolumeOfMobileData())) {
                                 String dateKey = consumptionResultAll.getValue().getResult().getRecords().get(i).getQuarter().substring(0, 4);
@@ -62,7 +59,6 @@ public class HomeViewModel extends ViewModel {
                             }
                         }
                         muDownYear.setValue(downYears);
-
                     }
 
                     @Override

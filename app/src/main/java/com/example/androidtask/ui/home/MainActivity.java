@@ -55,53 +55,44 @@ public class MainActivity extends MyBaseActivity<ActivityMainBinding,
         if (getViewModel().isNetworkAvailable(this)) {
 
             getViewModel().getData();
-            Log.d("InternetStatus", String.valueOf(getViewModel().isNetworkAvailable(this)));
 
             getViewModel().muDownYear.observe(this, new Observer<List<String>>() {
                 @Override
                 public void onChanged(List<String> strings) {
-                    Log.d("DataVal", String.valueOf(strings.size()));
-                    for (int i = 0; i < strings.size() ; i++) {
+                    for (int i = 0; i < strings.size(); i++) {
                         yearDownward.add(strings.get(i));
-                        Log.d("DownyearsSize",String.valueOf(strings.get(i)));
                     }
-                }
-            });
 
+                    getViewModel().consumptionResultAll.observe(MainActivity.this, new Observer<SourceData>() {
+                        @Override
+                        public void onChanged(SourceData sourceData) {
+                            adapter.changeData(consumptionResultYear);
 
-            getViewModel().consumptionResultAll.observe(this, new Observer<SourceData>() {
-                @Override
-                public void onChanged(SourceData sourceData) {
-                    adapter.changeData(consumptionResultYear);
+                            MyDataBase.getInstance().sourcesDao().deleteTable();
 
-                   Log.d("DownyearsSize",String.valueOf(yearDownward.size()));
-                    MyDataBase.getInstance().sourcesDao().deleteTable();
-
-                    for (int i = 0; i < sourceData.getResult().getRecords().size() - 1; i++) {
-                        if (sourceData.getResult().getRecords().get(i).getQuarter().contains("Q1")) {
-                            Data data = new Data();
-                            data.setQuarter(sourceData.getResult().getRecords().get(i).getQuarter());
-                            data.setVolumeOfConsumption(sourceData.getResult().getRecords().get(i).getVolumeOfMobileData());
-                            data.setHadDownquarter(false);
-                            for (int j = 0; j < yearDownward.size()-1; j++) {
-                                if (sourceData.getResult().getRecords().get(i).getQuarter().contains(yearDownward.get(j))) {
-                                    data.setHadDownquarter(true);
-                                    Toast.makeText(MainActivity.this, "True is Added", Toast.LENGTH_SHORT).show();
+                            for (int i = 0; i < sourceData.getResult().getRecords().size() - 1; i++) {
+                                if (sourceData.getResult().getRecords().get(i).getQuarter().contains("Q1")) {
+                                    Data data = new Data();
+                                    data.setQuarter(sourceData.getResult().getRecords().get(i).getQuarter());
+                                    data.setVolumeOfConsumption(sourceData.getResult().getRecords().get(i).getVolumeOfMobileData());
+                                    data.setHadDownquarter(false);
+                                    for (int j = 0; j < yearDownward.size(); j++) {
+                                        if (sourceData.getResult().getRecords().get(i).getQuarter().contains(yearDownward.get(j))) {
+                                            data.setHadDownquarter(true);
+                                        }
+                                    }
+                                    MyDataBase.getInstance().sourcesDao().addData(data);
                                 }
                             }
-                            MyDataBase.getInstance().sourcesDao().addData(data);
                         }
-                    }
+                    });
                 }
             });
-
-
 
 
         } else {
             Toast.makeText(this, "Please Check Your Network :(", Toast.LENGTH_SHORT).show();
             //Get Data From Room Database
-            Log.d("InternetStatus", String.valueOf(getViewModel().isNetworkAvailable(this)));
             displayRoomData();
 
         }
@@ -117,13 +108,9 @@ public class MainActivity extends MyBaseActivity<ActivityMainBinding,
     }
 
     private void getRoomDatabase() {
-
-        Log.d("RoomSize", String.valueOf(MyDataBase.getInstance().sourcesDao().getAllData().size()));
         for (int i = 0; i < MyDataBase.getInstance().sourcesDao().getAllData().size(); i++) {
             RoomData.add(MyDataBase.getInstance().sourcesDao().getAllData().get(i));
-            Log.d("ValueFromRoom", String.valueOf(RoomData.get(i).getHadDownquarter()));
         }
-
     }
 
     private void initRecyclerView() {
